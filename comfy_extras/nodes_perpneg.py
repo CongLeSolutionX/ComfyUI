@@ -7,7 +7,7 @@ import comfy.utils
 
 class PerpNeg:
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {"required": {"model": ("MODEL", ),
                              "empty_conditioning": ("CONDITIONING", ),
                              "neg_scale": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 100.0}),

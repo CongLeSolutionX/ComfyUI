@@ -5,24 +5,22 @@ import comfy.utils
 def camera_embeddings(elevation, azimuth):
     elevation = torch.as_tensor([elevation])
     azimuth = torch.as_tensor([azimuth])
-    embeddings = torch.stack(
+    return torch.stack(
         [
-                torch.deg2rad(
-                    (90 - elevation) - (90)
-                ),  # Zero123 polar is 90-elevation
-                torch.sin(torch.deg2rad(azimuth)),
-                torch.cos(torch.deg2rad(azimuth)),
-                torch.deg2rad(
-                    90 - torch.full_like(elevation, 0)
-                ),
-        ], dim=-1).unsqueeze(1)
-
-    return embeddings
+            torch.deg2rad(
+                (90 - elevation) - (90)
+            ),  # Zero123 polar is 90-elevation
+            torch.sin(torch.deg2rad(azimuth)),
+            torch.cos(torch.deg2rad(azimuth)),
+            torch.deg2rad(90 - torch.full_like(elevation, 0)),
+        ],
+        dim=-1,
+    ).unsqueeze(1)
 
 
 class StableZero123_Conditioning:
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {"required": { "clip_vision": ("CLIP_VISION",),
                               "init_image": ("IMAGE",),
                               "vae": ("VAE",),

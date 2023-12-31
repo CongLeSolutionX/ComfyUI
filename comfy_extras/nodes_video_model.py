@@ -7,7 +7,7 @@ import folder_paths
 
 class ImageOnlyCheckpointLoader:
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {"required": { "ckpt_name": (folder_paths.get_filename_list("checkpoints"), ),
                              }}
     RETURN_TYPES = ("MODEL", "CLIP_VISION", "VAE")
@@ -23,7 +23,7 @@ class ImageOnlyCheckpointLoader:
 
 class SVD_img2vid_Conditioning:
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {"required": { "clip_vision": ("CLIP_VISION",),
                               "init_image": ("IMAGE",),
                               "vae": ("VAE",),
@@ -56,7 +56,7 @@ class SVD_img2vid_Conditioning:
 
 class VideoLinearCFGGuidance:
     @classmethod
-    def INPUT_TYPES(s):
+    def INPUT_TYPES(cls):
         return {"required": { "model": ("MODEL",),
                               "min_cfg": ("FLOAT", {"default": 1.0, "min": 0.0, "max": 100.0, "step":0.5, "round": 0.01}),
                               }}
